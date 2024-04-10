@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="heading-primary">Edycja danych użytkownika</h1>
+  {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+  {% endif %}
+  <form method="post" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="password" class="form-label">Aktualne hasło:</label>
+      <input type="password" id="password" name="password" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="first_name" class="form-label">Imię:</label>
+      <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="last_name" class="form-label">Nazwisko:</label>
+      <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="email" class="form-label">Email:</label>
+      <input type="email" id="email" name="email" value="{{ user.email }}" class="form-input">
+    </div>
+    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+    <a href="{% url 'change_password' %}" class="btn btn-secondary">Zmień hasło</a>
+  </form>
+{% endblock %}

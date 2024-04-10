@@ -1,0 +1,7 @@
+Data przekazania: {{ donation.donation_date }}<br>
+Ilość worków: {{ donation.quantity }}<br>
+Organizacja: {{ donation.institution.name }}<br>
+Kategorie: {% for category in donation.categories.all %}{{ category.name }}{% if not forloop.last %}, {% endif %}{% endfor %}<br>
+Planowana data odbioru: {{ donation.pick_up_date }}<br>
+Planowany czas odbioru: {{ donation.pick_up_time }}<br>
+Komentarz: {{ donation.pick_up_comment }}<br>

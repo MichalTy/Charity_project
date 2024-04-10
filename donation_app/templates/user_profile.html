@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 style="font-size: 24px;">Profil użytkownika</h1>
+
+  <h2 style="font-size: 20px;">Dary oczekujące na odbiór:</h2>
+  <ul>
+    {% for donation in user_donations %}
+      {% if not donation.is_taken %}
+      <li>
+        {% include 'donation_info.html' %}
+        <form action="{% url 'mark_taken' donation.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit">Oznacz jako zabrany</button>
+        </form>
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h2 style="font-size: 20px;">Oddane Dary:</h2>
+  <ul>
+    {% for donation in user_donations %}
+      {% if donation.is_taken %}
+      <li style="color: gray;">
+        {% include 'donation_info.html' %}
+      </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -21,7 +21,13 @@ from donation_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.LandingPage, name='landing_page'),
-    path('add_donation/', views.AddDonation, name='add_donation'),
+    path('add_donation/', views.AddDonationView, name='add_donation'),
+    path('form_confirmation/', views.FormConfirmation, name='form_confirmation'),
     path('login/', views.Login, name='login'),
+    path('logout/', views.Logout, name='logout'),
     path('register/', views.Register, name='register'),
+    path('user_profile/', views.UserProfile, name='user_profile'),
+    path('edit_profile/', views.EditProfile, name='edit_profile'),
+    path('change_password/', views.ChangePassword, name='change_password'),
+    path('mark_taken/<int:donation_id>/', views.mark_donation_taken, name='mark_taken'),
 ]
