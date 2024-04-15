@@ -244,8 +244,23 @@ document.addEventListener("DOMContentLoaded", function() {
      */
     submit(e) {
       e.preventDefault();
-      this.currentStep++;
-      this.updateForm();
+
+      const formData = new FormData(this.$form.querySelector("form"));
+
+      fetch("{% url 'add_donation' %}", {
+        method: "POST",
+        body: formData,
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "{% url 'form_confirmation' %}";
+        } else {
+          console.error("Error:", response.statusText);
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
     }
   }
   const form = document.querySelector(".form--steps");

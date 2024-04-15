@@ -64,7 +64,7 @@
           <label>
             <input
               type="checkbox"
-              name="categories"
+              name="quantity"
               value="{{ category.id }}"
             />
             <span class="checkbox"></span>
@@ -107,7 +107,7 @@
         <div class="form-group form-group--checkbox">
           {% for institution in institutions %}
           <label class="institution-label" style="display: none;" data-categories="{% for category in institution.categories.all %}{{ category.id }}{% if not forloop.last %},{% endif %}{% endfor %}">
-            <input type="radio" name="organization" value="{{ institution.id }}" />
+            <input type="radio" name="institution" value="{{ institution.id }}" />
             <span class="checkbox radio"></span>
             <span class="description">
               <div class="title">{{ institution.name }}</div>
@@ -140,13 +140,13 @@
 
             <div class="form-group form-group--inline">
               <label>
-                Kod pocztowy <input type="text" name="postcode" />
+                Kod pocztowy <input type="text" name="zip_code" />
               </label>
             </div>
 
             <div class="form-group form-group--inline">
               <label>
-                Numer telefonu <input type="phone" name="phone" />
+                Numer telefonu <input type="phone" name="phone_number" />
               </label>
             </div>
           </div>
@@ -154,17 +154,17 @@
           <div class="form-section--column">
             <h4>Termin odbioru</h4>
             <div class="form-group form-group--inline">
-              <label> Data <input type="date" name="data" /> </label>
+              <label> Data <input type="date" name="pick_up_date" /> </label>
             </div>
 
             <div class="form-group form-group--inline">
-              <label> Godzina <input type="time" name="time" /> </label>
+              <label> Godzina <input type="time" name="pick_up_time" /> </label>
             </div>
 
             <div class="form-group form-group--inline">
               <label>
                 Uwagi dla kuriera
-                <textarea name="more_info" rows="5"></textarea>
+                <textarea name="pick_up_comment" rows="5"></textarea>
               </label>
             </div>
           </div>
@@ -196,7 +196,7 @@
       });
     }
 
-    const categoryCheckboxes = document.querySelectorAll('input[name="categories"]');
+    const categoryCheckboxes = document.querySelectorAll('input[name="quantity"]');
     const selectedCategories = [];
     categoryCheckboxes.forEach(checkbox => {
       checkbox.addEventListener('change', function() {

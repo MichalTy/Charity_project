@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1 style="font-size: 24px;">Szczegóły Daru</h1>
+  <p><strong>Organizacja:</strong> {{ donation.institution }}</p>
+  <p><strong>Data przekazania:</strong> {{ donation.donation_date }}</p>
+  <p><strong>Przedmioty przekazane:</strong></p>
+  <ul>
+    {% for category in donation.categories.all %}
+      <li>{{ category.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

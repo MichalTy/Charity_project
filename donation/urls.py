@@ -30,4 +30,5 @@ urlpatterns = [
     path('edit_profile/', views.EditProfile, name='edit_profile'),
     path('change_password/', views.ChangePassword, name='change_password'),
     path('mark_taken/<int:donation_id>/', views.mark_donation_taken, name='mark_taken'),
+    path('donation_details/<int:donation_id>/', views.DonationDetails, name='donation_details'),
 ]

@@ -8,6 +8,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.db.models import Sum
+from django.http import JsonResponse
 
 from .models import Donation, Institution, Category
 from .forms import DonationForm
@@ -87,7 +88,10 @@ def AddDonationView(request):
             donation.categories.set(categories)
             donation.save()
 
-            return redirect('form_confirmation')
+            return JsonResponse({'success': True, 'redirect_url': 'form_confirmation'})
+
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
 
     return render(request, 'form.html', {
         'form': form, 'categories': categories, 'institutions': institutions
@@ -109,6 +113,14 @@ def mark_donation_taken(request, donation_id):
     donation.is_taken = True
     donation.save()
     return redirect('user_profile')
+
+
+def DonationDetails(request, donation_id):
+    """
+    Renders the details page for a specific donation.
+    """
+    donation = get_object_or_404(Donation, pk=donation_id)
+    return render(request, 'donation_details.html', {'donation': donation})
 
 
 def Register(request):

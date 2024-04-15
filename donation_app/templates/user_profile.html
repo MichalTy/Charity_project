@@ -12,6 +12,7 @@
           {% csrf_token %}
           <button type="submit">Oznacz jako zabrany</button>
         </form>
+        <a href="{% url 'donation_details' donation.id %}"><button>Szczegóły</button></a>
       </li>
       {% endif %}
     {% endfor %}
@@ -23,6 +24,7 @@
       {% if donation.is_taken %}
       <li style="color: gray;">
         {% include 'donation_info.html' %}
+        <a href="{% url 'donation_details' donation.id %}"><button>Szczegóły</button></a>
       </li>
       {% endif %}
     {% endfor %}
